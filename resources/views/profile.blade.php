@@ -12,6 +12,9 @@
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+                    <!-- Succes Message -->
+                    <x-success-message class="mb-4" :errors="$errors"></x-success-message>
+
                     <form action="{{ route('profile.update')}}" method="post">
                         @csrf
                         @method('PUT')
