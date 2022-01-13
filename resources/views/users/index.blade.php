@@ -10,14 +10,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Table show Users -->
-                    <div class="flex flex-auto justify-center">
+                    <div class="flex flex-col">
                       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <a href="{{ route('users.create') }}"class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                            <a href="{{ route('users.create') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                                 Create New User
                             </a>
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                              <table class="min-w-full divide-y divide-gray-200 mt-2">
+                              <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                   <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -32,14 +32,17 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                       Role
                                     </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                     Role
+                                    </th>
                                   </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                   @foreach ($users as $user)
                                       <tr>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 whitespace-nowrap">
                                           <div class="flex items-center">
-                                            <div class="ml-4">
+                                            <div>
                                               <div class="text-sm font-medium text-gray-900">
                                                   {{ $user->name }}
                                               </div>
@@ -59,13 +62,8 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                           Admin
                                         </td>
-                                        <td class="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                           <a href="#" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
-                                        </td>
-                                        <td class="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Update</a>
-                                        </td>
-                                        <td class="px-2 py-4 pr-4 whitespace-nowrap text-right text-sm font-medium">
                                           <a href="#" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Delete</a>
                                         </td>
                                       </tr>

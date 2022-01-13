@@ -10,44 +10,44 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-auth-validation-errors class="mb-4" :errors="$errors"></x-auth-validation-errors>
 
                     <!-- Succes Message -->
                     <x-success-message class="mb-4" :errors="$errors"></x-success-message>
 
-                    <form class="flex justify-center" action="{{ route('profile.update')}}" method="post">
-                        @csrf
+                    <form action="{{ route('profile.update') }}" method="post">
                         @method('PUT')
-                        <div>
-                            <div class="flex flex-row">
+                        @csrf
+                        <div class="flex flex-wrap">
+                            <div class="w-1/2 p-4">
                                 <div>
                                     <x-label for="name" :value="__('Name')"></x-label>
                                     <x-input class="block mt-1 w-full" type="text" name="name"
                                             value="{{ auth()->user()->name }}" autofocus></x-input>
                                 </div>
-                                <div class="px-6">
-                                    <x-label for="email" :value="__('Email')"></x-label>
-                                    <x-input class="block mt-1 w-full" type="text" name="email"
+                                <div>
+                                <x-label for="email" :value="__('Email')"></x-label>
+                                <x-input class="block mt-1 w-full" type="email" name="email"
                                             value="{{ auth()->user()->email }}"></x-input>
                                 </div>
                             </div>
-                            <div class="flex flex-row mt-6">
+                            <div class="w-1/2 p-4">
                                 <div>
                                     <x-label for="password" :value="__('New password')"></x-label>
                                     <x-input class="block mt-1 w-full" type="password"
                                             name="password" autocomplete="new-password"></x-input>
                                 </div>
-                                <div class="px-6">
+                                <div>
                                     <x-label for="password_confirmation" :value="__('Confirm password')"></x-label>
                                     <x-input class="block mt-1 w-full" type="password"
                                             name="password_confirmation"></x-input>
                                 </div>
                             </div>
-                            <div class="flex justify-center mt-4">
-                                <x-button>
-                                    Update
-                                </x-button>
-                            </div>
+                        </div>
+                        <div class="flex items-center justify-end mt-4">
+                            <x-button class="ml-3">
+                                Update
+                            </x-button>
                         </div>
                     </form>
                 </div>
