@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class ClientAuth
+class UserActive
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,11 @@ class ClientAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(auth()->user() && auth()->user()->status)
+        {
+            return $next($request);
+        }
+        request()->session()->invalidate();
+        return back();
     }
 }
