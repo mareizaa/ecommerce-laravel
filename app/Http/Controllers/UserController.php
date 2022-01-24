@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -36,7 +35,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProfileUpdateRequest $request)
+    public function store(Request $request)
     {
         User::create($request->only('name', 'email')
             + [
@@ -62,21 +61,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  object  $user, $request
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileUpdateRequest $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->only('name', 'email');
+        $password = $request->input('password');
+
+        if ($password)
+        {
+            $data['password'] = bcrypt($password);
+        }
+
+        $user->update($data);
+        return redirect()->route('users.index')->with('message', 'Successfully Edited');
     }
 
     /**

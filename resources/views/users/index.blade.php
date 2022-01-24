@@ -17,59 +17,58 @@
                                 Create New User
                             </a>
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                              <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                  <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                      Name
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                      Email
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                      Status
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                      Role
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                     Role
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                  @foreach ($users as $user)
-                                      <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                          <div class="flex items-center">
-                                            <div>
-                                              <div class="text-sm font-medium text-gray-900">
-                                                  {{ $user->name }}
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Name
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Email
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Status
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Role
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                      @foreach ($users as $user)
+                                          <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                              <div class="flex items-center">
+                                                <div>
+                                                  <div class="text-sm font-medium text-gray-900">
+                                                      {{ $user->name }}
+                                                  </div>
+                                                </div>
                                               </div>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                          <div class="text-sm text-gray-900">
-                                              {{ $user->email }}
-                                          </div>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Active
-                                          </span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                          Admin
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                          <a href="#" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
-                                          <a href="#" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Delete</a>
-                                        </td>
-                                      </tr>
-                                  @endforeach
-                                </tbody>
-                              </table>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                              <div class="text-sm text-gray-900">
+                                                  {{ $user->email }}
+                                              </div>
+                                            </td>
+                                            <td class="px-6 py-4">
+                                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                              </span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{ $user->role }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                              <a href="{{ route('users.edit', $user->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
+                                            </td>
+                                          </tr>
+                                      @endforeach
+                                    </tbody>
+                                </table>
                             </div>
 
                           <!-- Pagination -->
