@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
 
-class UserActive
+class LogoutBack
 {
     /**
      * Handle an incoming request.
@@ -17,11 +16,10 @@ class UserActive
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user() && auth()->user()->status)
-        {
-            return $next($request);
-        }
-        request()->session()->invalidate();
-        return back();
+        $response = $next($request);
+        return $response->header('Cache-Control','nocache, no-store, max-age=0, must-revalidate')
+            ->header('Pragma','no-cache')
+            ->header('Expires','Fri, 01 Jan 1990 00:00:00 GMT');
+
     }
 }
