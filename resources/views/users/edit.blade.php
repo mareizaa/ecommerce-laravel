@@ -46,7 +46,8 @@
                             <div class="w-1/2 p-4">
                                 <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.1.0/dist/flowbite.min.css" />
                                 <label for="status" class="flex items-center cursor-pointer relative">
-                                    <input type="checkbox" name="status" id="status" class="sr-only" {{ $user->status ? 'checked': '' }} value="{{  $user->status = 'checked' ? 1: 0 }}">
+                                    <input type="hidden" name="status" class="sr-only" value="0">
+                                    <input type="checkbox" name="status" id="status" class="sr-only" {{ $user->status ? 'checked': '' }} value="1">
                                     <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
                                     <span class="ml-3 text-gray-900 text-sm font-medium">Status</span>
                                 </label>
