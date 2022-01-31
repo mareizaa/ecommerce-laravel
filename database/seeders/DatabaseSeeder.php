@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\users\UsersSeeder;
+use Database\Seeders\products\ProductsSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersSeeder::class);
+        $this->call(ProductsSeeder::class);
     }
 }
