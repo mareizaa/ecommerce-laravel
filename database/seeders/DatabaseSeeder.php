@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\users\UsersSeeder;
+use Database\Seeders\products\ProductsSeeder;
+use Database\Seeders\products\ImagesSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,13 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
-            [
-                'name' => 'admin',
-                'email' => 'admin@gmail.com',
-                'password' => bcrypt('12345678'),
-                'role' => 'admin'
-            ]
-            );
+        $this->call(UsersSeeder::class);
+        $this->call(ProductsSeeder::class);
+        $this->call(ImagesSeeder::class);
     }
 }
