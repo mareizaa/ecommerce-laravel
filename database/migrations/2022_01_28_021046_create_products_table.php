@@ -12,9 +12,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->string('descripción');
+            $table->string('description');
             $table->integer('price');
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
             $table->unsignedInteger('quantity');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

@@ -11,7 +11,7 @@ class ProductFactory extends Factory
         return [
             'user_id' => 1,
             'name' => $this->faker->sentence(2, true),
-            'descripción' => $this->faker->text(100),
+            'description' => $this->faker->text(100),
             'price' => $this->faker->randomDigitNotZero(),
             'status' => true,
             'quantity' => $this->faker->randomDigitNotZero(),

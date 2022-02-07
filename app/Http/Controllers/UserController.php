@@ -19,7 +19,6 @@ class UserController extends Controller
 
     public function create()
     {
-        $this->authorize('create', User::class);
         return view('users.create');
     }
 
@@ -30,11 +29,6 @@ class UserController extends Controller
                 'password' => bcrypt($request->input('password')),
             ]);
         return back()->with('message', 'Successfully Created');
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit(User $user)
@@ -53,10 +47,5 @@ class UserController extends Controller
 
         $user->update($data);
         return redirect()->route('users.index')->with('message', 'Successfully Edited');
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }
