@@ -10,9 +10,9 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')
-                ->constrained();
+            $table->unsignedBigInteger('product_id');
             $table->string('image_name', 50);
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

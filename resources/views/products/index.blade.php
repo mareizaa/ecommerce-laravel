@@ -52,7 +52,9 @@
                                                 <div class="flex items-center">
                                                   <div>
                                                     <div class="text-sm font-medium text-gray-900">
-                                                        <img class="h-10 w-10 rounded-full" src=""{{ asset('filesystems.images_disk'.$product->images) }}"" alt="">
+                                                        @foreach ($product->image as $image)
+                                                            <img class="h-10 w-10 rounded-full" src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="">
+                                                        @endforeach
                                                     </div>
                                                   </div>
                                                 </div>
@@ -83,11 +85,15 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 <div class="text-sm text-gray-900">
-                                                    Active
+                                                    @if ( $product->status )
+                                                        Active
+                                                    @else
+                                                        Inactive
+                                                    @endif
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                              <a href="#" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
+                                              <a href="{{ route('products.edit', $product->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
                                             </td>
                                           </tr>
                                       @endforeach
