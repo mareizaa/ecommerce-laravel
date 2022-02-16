@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\Users\UserStoreRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
 use App\Http\Requests\UserUpdateRequest as RequestsUserUpdateRequest;
 use App\Models\User;
@@ -24,11 +24,13 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
-        User::create($request->only('name', 'email')
-            + [
-                'password' => bcrypt($request->input('password')),
-            ]);
-        return back()->with('message', 'Successfully Created');
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        return redirect()->route('users.index')->with('message', 'Successfully Edited');
     }
 
     public function edit(User $user)
