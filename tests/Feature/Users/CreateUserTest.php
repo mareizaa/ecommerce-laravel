@@ -7,30 +7,32 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 
-class IndexUserTest extends TestCase
+class CreateUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testRouteIndexExist(): void
+    public function testRouteCreateExist()
     {
         $user = User::factory()->create([
             'role' => 'admin',
         ]);
-        $response = $this->actingAs($user)->get(route('users.index'));
+
+        $response = $this->actingAs($user)->get(route('users.create'));
         $response->assertOk();
+        $response->assertViewIs('users.create');
     }
 
-    public function testRouteIndexCanViewUsers(): void
+    public function testDisplayFormCreateUsers()
     {
         $user = User::factory()->create([
             'role' => 'admin',
         ]);
-        $response = $this->actingAs($user)->get(route('users.index'));
+
+        $response = $this->actingAs($user)->get(route('users.create'));
         $response->assertOk();
-        $response->assertViewIs('users.index');
-        $response->assertViewHas('users');
+        $response->assertViewIs('users.create');
         $response->assertSee($user->name);
         $response->assertSee($user->email);
-        $response->assertSee($user->status);
+        $response->assertSee($user->password_hash);
     }
 }
