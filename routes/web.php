@@ -27,7 +27,6 @@ Route::group(['middleware' => ['auth', 'verified', 'user.active', 'logout.back']
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
-    //Route::view('dashboard', ProductController::class);
 });
 
 require __DIR__.'/auth.php';

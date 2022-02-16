@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\Products\ProductStoreRequest;
+use App\Http\Requests\Products\ProductUpdateRequest;
 use App\Models\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Actions\StoreProductImagesAction;
 
 class ProductController extends Controller
 {
@@ -39,7 +41,7 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(ProductStoreRequest $request)
+    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction)
     {
         $product = new Product();
         $product->user_id = auth()->id();
@@ -50,13 +52,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        $file = $request->images;
-        $image = new Image();
-        $image->product_id = $product->id;
-        $image->image_name = (string) Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs($product->id, $image->image_name, config('filesystems.images_disk'));
-
-        $product->image()->save($image);
+        $imagesAction->execute($request->images, $product);
 
         return redirect(route('products.show', compact('product')));
     }
@@ -71,7 +67,7 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction)
     {
         $data = $request->only('name', 'description', 'status', 'price', 'quantity');
 
@@ -79,13 +75,8 @@ class ProductController extends Controller
 
         if ($request->images != null)
         {
-            $file = $request->images;
-            $image = new Image();
-            $image->product_id = $product->id;
-            $image->image_name = (string) Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs($product->id, $image->image_name, config('filesystems.images_disk'));
             $product->image()->delete();
-            $product->image()->save($image);
+            $imagesAction->execute($request->images, $product);
         }
 
         return redirect(route('products.show', compact('product')));

@@ -53,7 +53,7 @@
                                                   <div>
                                                     <div class="text-sm font-medium text-gray-900">
                                                         @foreach ($product->image as $image)
-                                                            <img class="h-10 w-10 rounded-full" src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="">
+                                                            <img class="w-full h-12 w-12 rounded" src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="">
                                                         @endforeach
                                                     </div>
                                                   </div>
