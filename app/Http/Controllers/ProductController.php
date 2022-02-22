@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Requests\Products\ProductStoreRequest;
 use App\Http\Requests\Products\ProductUpdateRequest;
-use App\Models\Image;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Actions\StoreProductImagesAction;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(): view
     {
         $products = Product::with([
             'image' => function ($query) {
@@ -25,7 +22,7 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    public function home()
+    public function home(): view
     {
         $products = Product::with([
             'image' => function ($query) {
@@ -36,12 +33,12 @@ class ProductController extends Controller
         return view('welcome', compact('products'));
     }
 
-    public function create()
+    public function create(): view
     {
         return view('products.create');
     }
 
-    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction)
+    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction): RedirectResponse
     {
         $product = new Product();
         $product->user_id = auth()->id();
@@ -57,33 +54,27 @@ class ProductController extends Controller
         return redirect(route('products.show', compact('product')));
     }
 
-    public function show(Product $product)
+    public function show(Product $product): view
     {
         return view('products.show', compact('product'));
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product): view
     {
         return view('products.edit', compact('product'));
     }
 
-    public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction)
+    public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction): RedirectResponse
     {
         $data = $request->only('name', 'description', 'status', 'price', 'quantity');
 
         $product->update($data);
 
-        if ($request->images != null)
-        {
+        if ($request->images != null) {
             $product->image()->delete();
             $imagesAction->execute($request->images, $product);
         }
 
         return redirect(route('products.show', compact('product')));
-    }
-
-    public function destroy(Product $product)
-    {
-        //
     }
 }
