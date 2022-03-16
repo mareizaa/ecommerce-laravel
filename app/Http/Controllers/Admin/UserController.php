@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserStoreRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
 use App\Http\Requests\UserUpdateRequest as RequestsUserUpdateRequest;

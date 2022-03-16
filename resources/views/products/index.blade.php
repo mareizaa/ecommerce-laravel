@@ -46,57 +46,57 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                      @foreach ($products as $product)
-                                          <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                  <div>
-                                                    <div class="text-sm font-medium text-gray-900">
-                                                        @foreach ($product->image as $image)
-                                                            <img class="w-full h-12 w-12 rounded" src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="">
-                                                        @endforeach
+                                        @foreach ($products as $product)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                      <div>
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            @foreach ($product->image as $image)
+                                                                <img class="w-full h-12 w-12 rounded" src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="">
+                                                            @endforeach
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                  <div class="flex items-center">
+                                                    <div>
+                                                      <div class="text-sm font-medium text-gray-900">
+                                                          {{ $product->name }}
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </div>
-                                              </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                              <div class="flex items-center">
-                                                <div>
-                                                  <div class="text-sm font-medium text-gray-900">
-                                                      {{ $product->name }}
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ $product->description }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ $product->price }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ $product->quantity }}
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    @if ( $product->status )
-                                                        Active
-                                                    @else
-                                                        Inactive
-                                                    @endif
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                              <a href="{{ route('products.edit', $product->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
-                                            </td>
-                                          </tr>
-                                      @endforeach
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ $product->description }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ $product->price }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        {{ $product->quantity }}
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div class="text-sm text-gray-900">
+                                                        @if ( $product->status )
+                                                            Active
+                                                        @else
+                                                            Inactive
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                    <a href="{{ url("products/{$product->id}/edit") }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Edit</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
