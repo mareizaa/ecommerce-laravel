@@ -12,13 +12,9 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <script src="{{ asset('js/app.js') }}"></script>
-
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100" id="app">
+        <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Content -->
@@ -26,5 +22,7 @@
                 {{ $slot }}
             </main>
         </div>
+
     </body>
+    <script src="{{ asset('js/app.js') }}"></script>
 </html>
