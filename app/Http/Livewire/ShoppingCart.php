@@ -18,7 +18,6 @@ class ShoppingCart extends Component
     public $orderId;
     public $in;
     public $obj;
-    //public $product;
 
     protected $listeners = ['productAdded' => 'incrementProducts'];
 
@@ -43,6 +42,8 @@ class ShoppingCart extends Component
         $this->countProducts();
         $this->total = 0;
         $this->sumTotal();
+        Order::where('id', $orderCurrent->id)
+               ->update(['total' => $this->total]);
     }
 
     public function incrementProducts($product)
