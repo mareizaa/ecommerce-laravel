@@ -16,11 +16,11 @@ class CreateOrders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->integer('total');
+            $table->integer('total')->nullable();
             $table->string('currency')->default("COP");
-            $table->enum('state', ['approved', 'pending', 'rejected'])->default('pending');
-            $table->integer('session_id');
-            $table->string('session_url');
+            $table->enum('state', ['approved', 'pending', 'rejected', 'in_cart'])->default('in_cart');
+            $table->integer('session_id')->nullable();
+            $table->string('session_url')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

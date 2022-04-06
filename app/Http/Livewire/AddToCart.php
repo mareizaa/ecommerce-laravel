@@ -17,6 +17,6 @@ class AddToCart extends Component
 
     public function addproduct()
     {
-        $this->emit('postAdded', $this->product);
+        $this->emit('productAdded', $this->product);
     }
 }

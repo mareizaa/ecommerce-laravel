@@ -25,7 +25,8 @@
                                             <p class="mt-1 text-lg font-medium text-gray-900">${{ $product->price }}</p>
                                         </div>
                                         <div>
-                                            @livewire('add-to-cart', ['product' => $product])                                        </div>
+                                            @livewire('add-to-cart', ['product' => $product])
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach

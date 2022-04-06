@@ -2,9 +2,8 @@
     <x-dropdown align="right" width="48">
         <x-slot name="trigger">
             <div class="flex flex-row cursor-pointer truncate p-2 px-4  rounded">
-                <div></div>
                 <div class="flex flex-row-reverse ml-2 w-full">
-                    <div slot="icon" class="relative">
+                    <div slot="icon" class="relative" wire:click="setProducts"">
                         <div class="absolute text-xs rounded-full -mt-1 -mr-2 px-1 font-bold top-0 right-0 bg-red-700 text-white">{{ $count }}</div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart w-6 h-6 mt-2">
                             <circle cx="9" cy="21" r="1"></circle>
@@ -22,9 +21,10 @@
                     <div class="font-bold">
                             <p>{{ $product['name'] }}</p>
                     </div>
+                    <div class="text-gray-600">{{ $product['quantity'] }}</div>
                 </div>
                 <div class="flex flex-col w-18 font-medium items-end">
-                    <div class="w-4 h-4 mb-1 hover:bg-red-200 rounded-full cursor-pointer text-red-700">
+                    <div class="w-4 h-4 mb-1 hover:bg-red-200 rounded-full cursor-pointer text-red-700" wire:click="deleteProduct">
                         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 ">
                             <polyline points="3 6 5 6 21 6"></polyline>
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -32,7 +32,7 @@
                             <line x1="14" y1="11" x2="14" y2="17"></line>
                         </svg>
                     </div>
-                    <div class="text-gray-600">$12.000</div>
+                    <div class="text-gray-600">${{ $product['amount'] }}</div>
                 </div>
             </div>
             @endforeach
@@ -42,7 +42,7 @@
                     bg-teal-100
                     text-teal-700
                     border duration-200 ease-in-out
-                    border-teal-600 transition">Checkout $36.66</button>
+                    border-teal-600 transition">Chekout ${{ $total }}</button>
                 </x-dropdown-link>
             </form>
         </x-slot>
