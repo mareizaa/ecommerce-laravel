@@ -56,12 +56,14 @@ class ShoppingCart extends Component
             $order = new Order();
             $order->user_id = auth()->id();
             $order->save();
-            $item = new OrderItem();
-            $item->product_id = $product['id'];
-            $item->order_id = $order->id;
-            $item->quantity = $product['quantity'];
-            $item->amount = $product['price'];
-            $item->save();
+            $order->products()->attach($product['id'], ['quantity' => $product['quantity'],
+                'amount' => $product['price']]);
+            //$item = new OrderItem();
+            //$item->product_id = $product['id'];
+            //$item->order_id = $order->id;
+            //$item->quantity = $product['quantity'];
+            //$item->amount = $product['price'];
+            //$item->save();
         }
         else
         {

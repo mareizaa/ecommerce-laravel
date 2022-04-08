@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\OrderItem;
+use App\Models\Product;
 
 class Order extends Model
 {
@@ -12,8 +12,9 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    public function items()
+    public function products()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(Product::class, 'order_items')
+                    ->withPivot('quantity', 'amount');
     }
 }

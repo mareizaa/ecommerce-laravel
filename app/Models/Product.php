@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Image;
-use App\Models\OrderItem;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,9 +16,10 @@ class Product extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function items()
+    public function orders()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(Order::class, 'order_items')
+                    ->withPivot('quantity', 'amount');
     }
 
     protected $fillable = [
