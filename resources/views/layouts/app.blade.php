@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
+        @livewireStyles
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
     <body class="font-sans antialiased">
@@ -24,5 +25,6 @@
         </div>
 
     </body>
+    @livewireScripts
     <script src="{{ asset('js/app.js') }}"></script>
 </html>

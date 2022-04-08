@@ -18,7 +18,7 @@ class CreateOrderItems extends Migration
             $table->bigInteger('order_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
             $table->tinyInteger('quantity');
-            $table->decimal('amount');
+            $table->integer('amount');
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');

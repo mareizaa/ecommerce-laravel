@@ -25,7 +25,7 @@
                                             <p class="mt-1 text-lg font-medium text-gray-900">${{ $product->price }}</p>
                                         </div>
                                         <div>
-                                            <button class="mt-4 bg-yellow-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold" @click="count++"><i class="mdi mdi-cart -ml-2 mr-2"></i> BUY NOW</button>
+                                            @livewire('add-to-cart', ['product' => $product])
                                         </div>
                                     </div>
                                 </div>
