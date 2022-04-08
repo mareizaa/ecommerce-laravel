@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductShowController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ShoppingCart;
+use App\Http\Controllers\PaymentController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::group(['middleware' => ['auth', 'verified', 'user.active', 'logout.back']
 });
 
 Route::get('shopping', [ShoppingCart::class, 'payment'])->name('cart.shopping');
+Route::get('webcheckout', [PaymentController::class, 'createSession'])->name('webcheckout');
 Route::get('/', [ProductShowController::class, 'home'])->name('welcome');
 Route::get('/products/{product}', [ProductShowController::class, 'show'])->name('products.show');
 

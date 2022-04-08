@@ -2,10 +2,10 @@
 
 namespace App\Requests;
 
-use App\Contracts\WebcheckoutContract;
+use App\Contracts\WebcheckoutRequestContract;
 use Illuminate\Support\Str;
 
-class GetInformationRequest implements WebcheckoutContract
+class GetInformationRequest implements WebcheckoutRequestContract
 {
     public function auth()
     {
@@ -16,8 +16,8 @@ class GetInformationRequest implements WebcheckoutContract
         return [
             'auth' => [
                 'login' => config('webcheckout.login'),
-                'trankey' => $tranKey,
-                'noce' => base64_encode($nonce),
+                'tranKey' => $tranKey,
+                'nonce' => base64_encode($nonce),
                 'seed' => $seed
             ]
         ];
