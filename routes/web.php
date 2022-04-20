@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth', 'verified', 'user.active', 'logout.back']
 
 Route::get('shopping', [ShoppingCart::class, 'payment'])->name('cart.shopping');
 Route::get('webcheckout', [PaymentController::class, 'createSession'])->name('webcheckout');
+Route::get('payments', [PaymentController::class, 'resultTransation'])->name('payments');
+Route::get('pendings', [PaymentController::class, 'pendings'])->name('pendings');
 Route::get('/', [ProductShowController::class, 'home'])->name('welcome');
 Route::get('/products/{product}', [ProductShowController::class, 'show'])->name('products.show');
 

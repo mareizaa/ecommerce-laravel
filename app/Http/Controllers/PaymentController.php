@@ -24,8 +24,8 @@ class PaymentController extends Controller
                     'total' => $order->total,
                 ]
                 ],
-            'expiration' => date('c', strtotime('+10 minutes')),
-            'returnUrl' => route('welcome'),
+            'expiration' => date('c', strtotime('+30 minutes')),
+            'returnUrl' => route('payments'),
             ];
         $data = (new CreateRequest($payment))->toArray();
         $session = (new WebcheckoutService())->createSession($data);
@@ -35,6 +35,20 @@ class PaymentController extends Controller
             $order->session_url = $session['processUrl'];
             $order->save();
         }
+        return redirect($order->session_url);
+    }
+
+    public function resultTransation()
+    {
+        $order = Order::where('user_id', auth()->id())->latest()->first();
+        $items = $order->products()->get();
+        return view('cart.payments', compact(['items', 'order']));
+    }
+
+    public function pendings()
+    {
+        $order = Order::where('user_id', auth()->id())
+        ->where('state', OrderStatus::PENDING)->first();
         return redirect($order->session_url);
     }
 }
