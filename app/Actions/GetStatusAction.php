@@ -10,8 +10,8 @@ class GetStatusAction
     public function handle(Order $order)
     {
         $orderStatus = (new WebcheckoutService)->getInformation($order->session_id);
-        if ($orderStatus['payment'][0]['status']['status'] != "PENDING"){
-            $order->state = $orderStatus['payment'][0]['status']['status'];
+        if ($orderStatus['status']['status'] != "PENDING"){
+            $order->state = $orderStatus['status']['status'];
             $order->save();
         }
     }
