@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use App\Contracts\WebcheckoutRequestContract;
 use App\Requests\CreateRequest;
 use App\Requests\GetInformationRequest;
@@ -20,7 +21,7 @@ class WebcheckoutService
         $getInformation = new GetInformationRequest();
         $data = $getInformation->auth();
         $url = $getInformation->url($session_id);
-        return $this->request($data,$url);
+        return $this->request($data, $url);
     }
 
     public function createSession(array $data)
@@ -29,16 +30,16 @@ class WebcheckoutService
 
         $data = $createRequest->toArray();
         $url = $createRequest->url(null);
-        return $this->request($data,$url);
+        return $this->request($data, $url);
     }
 
     private function request(array $data, string $url)
     {
-        $response = $this->client->request('post',$url,[
+        $response = $this->client->request('post', $url, [
             'json' => $data,
             'verify' => false
         ]);
         $content = $response->getBody()->getContents();
-        return json_decode($content,true);
+        return json_decode($content, true);
     }
 }

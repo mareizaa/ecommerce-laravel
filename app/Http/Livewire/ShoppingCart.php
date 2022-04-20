@@ -26,23 +26,26 @@ class ShoppingCart extends Component
         $this->products = [];
         $orderCurrent = Order::where('user_id', auth()->id())
         ->where('state', 'in_cart')->first();
-        $orderItem = OrderItem::where('order_id', $orderCurrent->id)->get();
 
-        foreach ($orderItem as $item) {
-            $product = Product::where('id', $item['product_id'])->first();
-            $product_item = [
-                'name'=> $product['name'],
-                'amount'=> $item['amount'],
-                'quantity' => $item['quantity'],
-            ];
-            array_push($this->products, $product_item);
+        if ($orderCurrent) {
+            $orderItem = OrderItem::where('order_id', $orderCurrent->id)->get();
+
+            foreach ($orderItem as $item) {
+                $product = Product::where('id', $item['product_id'])->first();
+                $product_item = [
+                    'name'=> $product['name'],
+                    'amount'=> $item['amount'],
+                    'quantity' => $item['quantity'],
+                ];
+                array_push($this->products, $product_item);
+            }
+
+            $this->countProducts();
+            $this->total = 0;
+            $this->sumTotal();
+            Order::where('id', $orderCurrent->id)
+                   ->update(['total' => $this->total]);
         }
-
-        $this->countProducts();
-        $this->total = 0;
-        $this->sumTotal();
-        Order::where('id', $orderCurrent->id)
-               ->update(['total' => $this->total]);
     }
 
     public function incrementProducts($product)

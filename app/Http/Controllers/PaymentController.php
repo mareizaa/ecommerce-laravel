@@ -29,8 +29,7 @@ class PaymentController extends Controller
             ];
         $data = (new CreateRequest($payment))->toArray();
         $session = (new WebcheckoutService())->createSession($data);
-        if($session['status']['status'] === "OK")
-        {
+        if ($session['status']['status'] === "OK") {
             $order->state = OrderStatus::PENDING;
             $order->session_id = $session['requestId'];
             $order->session_url = $session['processUrl'];
