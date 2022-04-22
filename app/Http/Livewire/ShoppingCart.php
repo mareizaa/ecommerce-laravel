@@ -26,24 +26,26 @@ class ShoppingCart extends Component
         $this->products = [];
         $orderCurrent = Order::where('user_id', auth()->id())
         ->where('state', 'in_cart')->first();
-        $orderItem = OrderItem::where('order_id', $orderCurrent->id)->get();
 
-        foreach ($orderItem as $item)
-        {
-            $product = Product::where('id', $item['product_id'])->first();
-            $product_item = [
-                'name'=> $product['name'],
-                'amount'=> $item['amount'],
-                'quantity' => $item['quantity'],
-            ];
-            array_push($this->products, $product_item);
+        if ($orderCurrent) {
+            $orderItem = OrderItem::where('order_id', $orderCurrent->id)->get();
+
+            foreach ($orderItem as $item) {
+                $product = Product::where('id', $item['product_id'])->first();
+                $product_item = [
+                    'name'=> $product['name'],
+                    'amount'=> $item['amount'],
+                    'quantity' => $item['quantity'],
+                ];
+                array_push($this->products, $product_item);
+            }
+
+            $this->countProducts();
+            $this->total = 0;
+            $this->sumTotal();
+            Order::where('id', $orderCurrent->id)
+                   ->update(['total' => $this->total]);
         }
-
-        $this->countProducts();
-        $this->total = 0;
-        $this->sumTotal();
-        Order::where('id', $orderCurrent->id)
-               ->update(['total' => $this->total]);
     }
 
     public function incrementProducts($product)
@@ -51,28 +53,23 @@ class ShoppingCart extends Component
         $orderCurrent = Order::where('user_id', auth()->id())
                             ->where('state', 'in_cart')->first();
 
-        if (!$orderCurrent)
-        {
+        if (!$orderCurrent) {
             $order = new Order();
             $order->user_id = auth()->id();
             $order->save();
             $order->products()->attach($product['id'], ['quantity' => $product['quantity'],
                 'amount' => $product['price']]);
-            //$item = new OrderItem();
+        //$item = new OrderItem();
             //$item->product_id = $product['id'];
             //$item->order_id = $order->id;
             //$item->quantity = $product['quantity'];
             //$item->amount = $product['price'];
             //$item->save();
-        }
-        else
-        {
+        } else {
             $orderItem = OrderItem::where('order_id', $orderCurrent->id)->get();
 
-            foreach ($orderItem as $item)
-            {
-                if($item['product_id'] === $product['id'])
-                {
+            foreach ($orderItem as $item) {
+                if ($item['product_id'] === $product['id']) {
                     $this->in = true;
                     $this->obj = $item;
                     break;
@@ -82,9 +79,7 @@ class ShoppingCart extends Component
                 OrderItem::where('order_id', $orderCurrent->id)
                 ->where('product_id', $product['id'])
                 ->update(['quantity' => ($this->obj['quantity'] + 1), 'amount' => ($this->obj['amount'] + $product['price'])]);
-            }
-            else
-            {
+            } else {
                 $item = new OrderItem();
                 $item->product_id = $product['id'];
                 $item->order_id = $orderCurrent->id;
@@ -103,8 +98,7 @@ class ShoppingCart extends Component
 
     public function sumTotal()
     {
-        foreach ($this->products as $product)
-        {
+        foreach ($this->products as $product) {
             $this->total = ($this->total + $product['amount']);
         }
     }
@@ -119,4 +113,3 @@ class ShoppingCart extends Component
         return view('livewire.shopping-cart');
     }
 }
-

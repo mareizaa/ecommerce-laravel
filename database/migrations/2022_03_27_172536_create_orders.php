@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ class CreateOrders extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->integer('total')->nullable();
             $table->string('currency')->default("COP");
-            $table->enum('state', ['approved', 'pending', 'rejected', 'in_cart'])->default('in_cart');
+            $table->enum('state', OrderStatus::toArray())->default('in_cart');
             $table->integer('session_id')->nullable();
             $table->string('session_url')->nullable();
             $table->timestamps();

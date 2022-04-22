@@ -19,12 +19,11 @@
                               </tr>
                             </thead>
                             <tbody>
-
-                            @foreach ($order->items as $orderinfo )
+                            @foreach ($items as $item )
                                 <tr>
-                                    <td class="p-4 px-6 text-center whitespace-nowrap"> {{ $orderinfo->product_id }}</td>
-                                    <td class="p-4 px-6 text-center whitespace-nowrap">{{ $orderinfo->quantity }}</td>
-                                    <td class="p-4 px-6 text-center whitespace-nowrap">{{ $orderinfo->amount }}</td>
+                                    <td class="p-4 px-6 text-center whitespace-nowrap"> {{ $item->name }}</td>
+                                    <td class="p-4 px-6 text-center whitespace-nowrap">{{ $item['pivot']['quantity'] }}</td>
+                                    <td class="p-4 px-6 text-center whitespace-nowrap">{{ $item['pivot']['amount'] }}</td>
                                     <td class="p-4 px-6 text-center whitespace-nowrap">
                                       <button class="px-2 py-0 text-red-100 bg-red-600 rounded">
                                         x
@@ -37,13 +36,11 @@
                           </table>
                           <div class="flex justify-end mt-4 space-x-2">
                             <div class="p-4 px-6 font-bold text-gray-900" >
-                              Total - $ {{ $order->total }}
+                              Total - $ {{ $order->total}}
                             </div>
-                            <button
-                            class=" px-6 text-sm text-white bg-indigo-500 hover:bg-indigo-600"
-                            >
-                            Proceed to Checkout
-                          </button>
+                            <button class="px-6 text-sm text-white bg-indigo-500 hover:bg-indigo-600">
+                                <a href="webcheckout" type="button">Proceed to Checkout</a>
+                            </button>
                           </div>
                         </div>
                       </div>
