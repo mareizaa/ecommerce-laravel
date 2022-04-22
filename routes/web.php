@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductShowController;
+use App\Http\Controllers\ExportProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ShoppingCart;
@@ -29,9 +30,10 @@ Route::group(['middleware' => ['auth', 'verified', 'user.active', 'logout.back']
 
 Route::get('shopping', [ShoppingCart::class, 'payment'])->name('cart.shopping');
 Route::get('webcheckout', [PaymentController::class, 'createSession'])->name('webcheckout');
-Route::get('payments', [PaymentController::class, 'resultTransation'])->name('payments');
+Route::get('payments/{reference}', [PaymentController::class, 'resultTransation'])->name('payments');
 Route::get('pendings', [PaymentController::class, 'pendings'])->name('pendings');
 Route::get('/', [ProductShowController::class, 'home'])->name('welcome');
 Route::get('/products/{product}', [ProductShowController::class, 'show'])->name('products.show');
+Route::get('/products/export/process', [ExportProductController::class, 'export']);
 
 require __DIR__.'/auth.php';

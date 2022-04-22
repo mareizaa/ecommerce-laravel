@@ -25,7 +25,7 @@ class PaymentController extends Controller
                 ]
                 ],
             'expiration' => date('c', strtotime('+30 minutes')),
-            'returnUrl' => route('payments'),
+            'returnUrl' => route('payments', [$order->id]),
             ];
         $data = (new CreateRequest($payment))->toArray();
         $session = (new WebcheckoutService())->createSession($data);
@@ -38,10 +38,13 @@ class PaymentController extends Controller
         return redirect($order->session_url);
     }
 
-    public function resultTransation()
+    public function resultTransation(Request $request, $reference)
     {
-        $order = Order::where('user_id', auth()->id())->latest()->first();
+        $order = Order::find($reference);
         $items = $order->products()->get();
+        $session = (new WebcheckoutService)->getInformation($order->session_id);
+        $order->state = $session['status']['status'];
+        $order->save();
         return view('cart.payments', compact(['items', 'order']));
     }
 
