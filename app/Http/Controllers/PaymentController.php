@@ -41,11 +41,10 @@ class PaymentController extends Controller
     public function resultTransation(Request $request, $reference)
     {
         $order = Order::find($reference);
-        $items = $order->products()->get();
         $session = (new WebcheckoutService)->getInformation($order->session_id);
         $order->state = $session['status']['status'];
         $order->save();
-        return view('cart.payments', compact(['items', 'order']));
+        return view('cart.payments', compact('order'));
     }
 
     public function pendings()
