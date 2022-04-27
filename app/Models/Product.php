@@ -22,6 +22,11 @@ class Product extends Model
                     ->withPivot('quantity', 'amount');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected $fillable = [
         'id',
         'name',
