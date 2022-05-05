@@ -28,6 +28,8 @@ class Product extends Model
     }
 
     protected $fillable = [
+        'user_id',
+        'reference',
         'id',
         'name',
         'description',

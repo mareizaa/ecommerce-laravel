@@ -14,6 +14,7 @@ class StoreProductAction
     {
         $product = new Product();
         $product->user_id = auth()->id();
+        $product->reference = $request->input('reference');
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
@@ -21,7 +22,11 @@ class StoreProductAction
 
         $product->save();
 
-        $imagesAction->execute($request->images, $product);
+        if($request->images)
+        {
+            $imagesAction->execute($request->images, $product);
+        }
+
         return $product;
     }
 }

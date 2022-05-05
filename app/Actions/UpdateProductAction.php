@@ -12,6 +12,7 @@ class UpdateProductAction
 {
     public function execute(object $request, Model $product, StoreProductImagesAction $imagesAction): Model
     {
+        $product->reference = $request->input('reference');
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
