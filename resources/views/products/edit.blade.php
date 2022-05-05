@@ -22,6 +22,10 @@
                         <div class="flex flex-wrap">
                             <div class="w-1/2 p-4">
                                 <div>
+                                    <x-label for="reference" :value="__('Reference')"></x-label>
+                                    <x-input class="block mt-1 w-full" type="text" name="reference" value="{{ old('reference', $product->reference) }}"></x-input>
+                                </div>
+                                <div>
                                     <x-label for="name" :value="__('Name')"></x-label>
                                     <x-input class="block mt-1 w-full" type="text" name="name" value="{{ old('name', $product->name) }}"></x-input>
                                 </div>
@@ -58,7 +62,6 @@
                                     </label>
                                 </div>
                             </div>
-
                         </div>
                         <div class="flex items-center justify-end mt-4">
                             <x-button class="ml-3">

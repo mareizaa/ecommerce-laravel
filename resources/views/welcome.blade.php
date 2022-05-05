@@ -15,7 +15,11 @@
                                     <div class="w-full h-80 aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                                         <a href="{{ route('products.show', $product->id) }}" class="group">
                                             @foreach ($product->image as $image)
-                                                <img src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
+                                                @if (Storage::disk(config('filesystems.images_disk'))->exists($product->id.'/'.$image->image_name))
+                                                    <img src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
+                                                @else
+                                                    <img src="{{ asset('img/imagedefault.jpg')}}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
+                                                @endif
                                             @endforeach
                                         </a>
                                     </div>
