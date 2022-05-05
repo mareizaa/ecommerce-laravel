@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -10,6 +11,7 @@ class ProductFactory extends Factory
     {
         return [
             'user_id' => 1,
+            'reference' => Str::random(5),
             'name' => $this->faker->sentence(2, true),
             'description' => $this->faker->text(100),
             'price' => $this->faker->randomDigitNotZero(),

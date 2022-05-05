@@ -21,6 +21,10 @@
                         <div class="flex flex-wrap">
                             <div class="w-1/2 p-4">
                                 <div>
+                                    <x-label for="reference" :value="__('Reference')"></x-label>
+                                    <x-input class="block mt-1 w-full" type="text" name="reference"></x-input>
+                                </div>
+                                <div>
                                     <x-label for="name" :value="__('Name')"></x-label>
                                     <x-input class="block mt-1 w-full" type="text" name="name"></x-input>
                                 </div>

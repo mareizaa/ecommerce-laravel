@@ -25,12 +25,12 @@ class ProductStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'reference' => ['required', 'unique:products'],
             'name' => ['required', 'min:5', 'max:100'],
             'description' => ['required', 'min:10', 'max:250'],
             'price' => ['required', 'integer', 'min:1'],
             'quantity' => ['required', 'integer', 'min:0'],
             'images' => [
-                'required',
                 'image',
                 'max:200',
                 Rule::dimensions()->maxWidth(300)->maxHeight(500),

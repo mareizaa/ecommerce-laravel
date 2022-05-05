@@ -29,6 +29,7 @@ return [
     */
 
     'images_disk' => env('IMAGE_STORAGE_DISK', 'images'),
+    'files_disk' => env('FILES_STORAGE_DISK', 'files'),
 
     'disks' => [
 
@@ -41,6 +42,12 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/images'),
             'url' => env('APP_URL').'app/public/images',
+        ],
+
+        'files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/files'),
+            'url' => env('APP_URL').'app/public/files',
         ],
 
         'public' => [
