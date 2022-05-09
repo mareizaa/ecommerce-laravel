@@ -12,10 +12,9 @@ use Illuminate\Http\Request;
 
 class ImportProductController extends Controller
 {
-    public function import(Request $request)
+    public function import(Request $request, UpdateProductAction $updateAction, StoreProductImagesAction $imagesAction)
     {
-        Excel::import(new ProductsImport(auth()->user()->id), $request->file('file')->store(config('filesystems.files_disk')));
-
+        Excel::import(new ProductsImport(auth()->user()->id, $updateAction, $imagesAction), $request->file('file')->store(config('filesystems.files_disk')));
         return redirect('/')->with('success', 'All good!');
     }
 }

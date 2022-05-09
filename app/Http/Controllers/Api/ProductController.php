@@ -20,9 +20,9 @@ class ProductController extends Controller
         return ProductResource::collection($product);
     }
 
-    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction, StoreProductAction $storeAction)
+    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction, UpdateProductAction $storeAction)
     {
-        $product = $storeAction->execute($request, $imagesAction);
+        $product = $storeAction->storeOrUpdateFromRequest($request, null, $imagesAction);
 
         return redirect()->route('api.products.show', $product);
     }
@@ -34,7 +34,7 @@ class ProductController extends Controller
 
     public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction, UpdateProductAction $updateAction): RedirectResponse
     {
-        $product = $updateAction->execute($request, $product, $imagesAction);
+        $product = $updateAction->storeOrUpdateFromRequest($request, $product, $imagesAction);
 
         return redirect()->route('api.products.show', $product);
     }

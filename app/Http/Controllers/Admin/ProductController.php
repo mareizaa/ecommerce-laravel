@@ -37,9 +37,9 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction, UpdateProductAction $updateAction): RedirectResponse
+    public function update(ProductStoreRequest $request, Product $product, StoreProductImagesAction $imagesAction, UpdateProductAction $updateAction): RedirectResponse
     {
-        $product = $updateAction->execute($request, $product, $imagesAction);
+        $product = $updateAction->storeOrUpdateFromRequest($request, $product, $imagesAction);
 
         return redirect(route('products.show', compact('product')));
     }

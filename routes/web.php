@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ShoppingCart;
 use App\Http\Controllers\PaymentController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,15 +26,15 @@ Route::group(['middleware' => ['auth', 'verified', 'user.active', 'logout.back']
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::get('shopping', [ShoppingCart::class, 'payment'])->name('cart.shopping');
+    Route::get('webcheckout', [PaymentController::class, 'createSession'])->name('webcheckout');
+    Route::get('payments/{reference}', [PaymentController::class, 'resultTransation'])->name('payments');
+    Route::get('pendings', [PaymentController::class, 'pendings'])->name('pendings');
+    Route::get('/products/export/process', [ExportProductController::class, 'export'])->name('products.export.process');
+    Route::post('/products/import/process', [ImportProductController::class, 'import'])->name('products.import.process');
 });
 
-Route::get('shopping', [ShoppingCart::class, 'payment'])->name('cart.shopping');
-Route::get('webcheckout', [PaymentController::class, 'createSession'])->name('webcheckout');
-Route::get('payments/{reference}', [PaymentController::class, 'resultTransation'])->name('payments');
-Route::get('pendings', [PaymentController::class, 'pendings'])->name('pendings');
 Route::get('/', [ProductShowController::class, 'home'])->name('welcome');
 Route::get('/products/{product}', [ProductShowController::class, 'show'])->name('products.show');
-Route::get('/products/export/process', [ExportProductController::class, 'export'])->name('products.export.process');
-Route::post('/products/import/process', [ImportProductController::class, 'import'])->name('products.import.process');
 
 require __DIR__.'/auth.php';
