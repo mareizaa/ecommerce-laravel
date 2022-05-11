@@ -10,7 +10,6 @@ class StoreProductImagesAction
 {
     public function execute(object $file, Product $product): void
     {
-        //dd($file);
         $image = new Image();
         $image->product_id = $product->id;
         $image->image_name = (string) Str::uuid() . '.' . $file->getClientOriginalExtension();

@@ -7,10 +7,11 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use App\Actions\StoreProductImagesAction;
+use App\Http\Requests\Products\ProductStoreRequest;
 
 class StoreProductAction
 {
-    public function execute(object $request, StoreProductImagesAction $imagesAction): Model
+    public function execute(ProductStoreRequest $request, StoreProductImagesAction $imagesAction): Model
     {
         $product = new Product();
         $product->user_id = auth()->id();
