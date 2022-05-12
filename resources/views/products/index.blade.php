@@ -44,9 +44,6 @@
                                     <thead class="bg-gray-50">
                                         <tr>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Image
-                                            </th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Name
                                             </th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -70,21 +67,6 @@
 
                                         @foreach ($products as $product)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="flex items-center">
-                                                      <div>
-                                                        <div class="text-sm font-medium text-gray-900">
-                                                            @foreach ($product->image as $image)
-                                                                @if (Storage::disk(config('filesystems.images_disk'))->exists($product->id.'/'.$image->image_name))
-                                                                    <img class="w-full h-12 w-12 rounded" src="{{ asset('storage/images/'.$product->id.'/'.$image->image_name) }} "alt="">
-                                                                @else
-                                                                    <img class="w-full h-12 w-12 rounded" src="{{ asset('img/imagedefault.jpg')}} "alt="">
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                   <div class="flex items-center">
                                                     <div>

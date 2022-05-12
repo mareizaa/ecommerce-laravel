@@ -21,6 +21,7 @@
                                                     <img src="{{ asset('img/imagedefault.jpg')}}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
                                                 @endif
                                             @endforeach
+                                            <img src="{{ asset('img/imagedefault.jpg')}}" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="w-full h-full object-center object-cover group-hover:opacity-75">
                                         </a>
                                     </div>
                                     <div class="flex justify-between">
