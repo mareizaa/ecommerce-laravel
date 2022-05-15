@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Contracts\View\View;
 
 class ShoppingCart extends Controller
 {
-    public function payment()
+    public function payment(): View
     {
         $order = Order::where('user_id', auth()->id())
                     ->where('state', 'in_cart')->first();

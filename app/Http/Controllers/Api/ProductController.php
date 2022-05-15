@@ -10,36 +10,37 @@ use App\Actions\StoreProductAction;
 use App\Actions\StoreProductImagesAction;
 use App\Http\Requests\Products\ProductUpdateRequest;
 use App\Actions\UpdateProductAction;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         $product = Product::paginate();
         return ProductResource::collection($product);
     }
 
-    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction, StoreProductAction $storeAction)
+    public function store(ProductStoreRequest $request, StoreProductImagesAction $imagesAction, StoreProductAction $storeAction): ProductResource
     {
         $product = $storeAction->execute($request, $imagesAction);
 
-        return redirect()->route('api.products.show', $product);
+        return new ProductResource($product);
     }
 
-    public function show(Product $product)
+    public function show(Product $product): ProductResource
     {
         return new ProductResource($product);
     }
 
-    public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction, UpdateProductAction $updateAction): RedirectResponse
+    public function update(ProductUpdateRequest $request, Product $product, StoreProductImagesAction $imagesAction, UpdateProductAction $updateAction): ProductResource
     {
         $product = $updateAction->execute($request, $product, $imagesAction);
 
-        return redirect()->route('api.products.show', $product);
+        return new ProductResource($product);
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product): JsonResponse
     {
         $product->delete();
 

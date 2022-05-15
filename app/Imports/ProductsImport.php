@@ -9,14 +9,14 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Actions\ImportProductAction;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class ProductsImport implements ToCollection, WithHeadingRow
+class ProductsImport implements ToCollection, WithHeadingRow, WithChunkReading, WithBatchInserts, WithValidation, ShouldQueue
 {
-    use SkipsErrors, Importable;
+    use Importable;
+
     protected Int $user;
     protected ImportProductAction $importAction;
 
@@ -26,8 +26,9 @@ class ProductsImport implements ToCollection, WithHeadingRow
         $this->importAction = $importAction;
     }
 
-    public function collection(Collection $rows)
+    public function collection(Collection $rows): void
     {
+
         foreach ($rows as $row) {
             $product = Product::where('reference', $row['reference'])->first();
 
@@ -43,13 +44,24 @@ class ProductsImport implements ToCollection, WithHeadingRow
         }
     }
 
-    /*public function rules(): array
+    public function rules(): array
     {
         return [
+            '*.reference' => ['required'],
             '*.name' => ['required', 'min:5', 'max:100'],
             '*.description' => ['required', 'min:10', 'max:250'],
             '*.price' => ['required', 'integer', 'min:1'],
             '*.quantity' => ['required', 'integer', 'min:0'],
         ];
-    }*/
+    }
+
+    public function batchSize(): int
+    {
+        return 1000;
+    }
+
+    public function chunkSize(): int
+    {
+        return 1000;
+    }
 }
