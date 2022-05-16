@@ -3,7 +3,7 @@
 namespace Database\Seeders\users;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class UsersSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
+        User::create(
             [
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
@@ -23,8 +23,8 @@ class UsersSeeder extends Seeder
                 'status' => '1',
                 'email_verified_at' => now(),
             ]
-        );
-        DB::table('users')->insert(
+        )->assignRole('admin');
+        User::create(
             [
                 'name' => 'Usuario',
                 'email' => 'user@gmail.com',
@@ -33,6 +33,6 @@ class UsersSeeder extends Seeder
                 'status' => '0',
                 'email_verified_at' => now(),
             ]
-        );
+        )->assignRole('client');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ImageFactory extends Factory
@@ -15,8 +14,8 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => 1,
-            'image_name' => $this->faker->image(),
+            'product_id' => rand(1, 10),
+            'image_name' => asset('img/imagedefault.jpg')
         ];
     }
 }

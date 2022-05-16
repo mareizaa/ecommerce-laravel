@@ -19,11 +19,16 @@
         "lodash": "^4.17.19",
         "postcss": "^8.4.6",
         "postcss-import": "^14.0.1",
-        "tailwindcss": "^3.0.18"
+        "tailwindcss": "^3.0.18",
+        "vue-loader": "^17.0.0"
     },
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
+    },
+    "dependencies": {
+        "jquery": "^3.6.0",
+        "vue": "^3.2.31"
     }
 }
