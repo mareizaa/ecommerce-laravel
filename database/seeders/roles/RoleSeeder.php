@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\roles;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -10,15 +10,16 @@ class RoleSeeder extends Seeder
 {
     public function run()
     {
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleClient = Role::create(['name' => 'client']);
+        $indexProducts = Permission::create(['name' => 'products']);
+        $indexUsers = Permission::create(['name' => 'users']);
 
-        Permission::create(['name' => 'products']);
-        Permission::create(['name' => 'users']);
+        $createUsers = Permission::create(['name' => 'users.create']);
+        $editUsers =Permission::create(['name' => 'users.edit']);
+        $createProducts = Permission::create(['name' => 'products.create']);
+        $editProducts = Permission::create(['name' => 'products.edit']);
+        $exportProducts =Permission::create(['name' => 'products.export']);
 
-        Permission::create(['name' => 'users.create']);
-        Permission::create(['name' => 'users.create']);
-        Permission::create(['name' => 'products.create']);
-        Permission::create(['name' => 'products.update']);
+        Role::create(['name' => 'admin'])->syncPermissions([$indexProducts, $indexUsers, $createUsers, $editUsers, $createProducts, $editProducts, $exportProducts]);
+        Role::create(['name' => 'client']);
     }
 }

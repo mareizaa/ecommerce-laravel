@@ -35,20 +35,22 @@
                                     </div>
                                 </button>
                             </x-slot>
+
                             <x-slot name="content">
                                 <!--Profile-->
                                 <x-dropdown-link :href="route('profile')">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
-                                @if (auth()->user()->role === 'admin')
+                                @can(['products', 'users'])
                                     <x-dropdown-link :href="route('users.index')">
                                         {{ __('users') }}
                                     </x-dropdown-link>
                                     <x-dropdown-link :href="route('products.index')">
                                         {{ __('Products') }}
                                     </x-dropdown-link>
-                                @endif
+                                @endcan
+
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

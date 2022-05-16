@@ -14,6 +14,11 @@ use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:products');
+    }
+
     public function index(): view
     {
         $products = Product::select(['id', 'name', 'description', 'price', 'quantity', 'status'])->paginate(10);
