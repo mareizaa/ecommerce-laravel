@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth', 'verified', 'user.active', 'logout.back']
 
 Route::get('/', [ProductShowController::class, 'home'])->name('welcome');
 Route::get('/products/{product}', [ProductShowController::class, 'show'])->name('products.show');
-Route::get('/products/export/process', [ExportProductController::class, 'export'])->name('products.export.process');
+Route::get('/products/export/process', [ExportProductController::class, 'export'])->name('products.export.process')->middleware(['auth', 'verified']);
 Route::post('/products/import/process', [ImportProductController::class, 'import'])->name('products.import.process');
 
 require __DIR__.'/auth.php';

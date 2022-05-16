@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserStoreRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
-use App\Http\Requests\UserUpdateRequest as RequestsUserUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:users');
+    }
+
     public function index()
     {
         $users = User::where('role', 'client')->paginate(5);
@@ -29,6 +32,7 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+        $user->assignRole('client');
         $user->save();
 
         return redirect()->route('users.index')->with('message', 'Successfully Edited');
