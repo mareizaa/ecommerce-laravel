@@ -23,8 +23,7 @@ class StoreProductAction
 
         $product->save();
 
-        if($request->images)
-        {
+        if ($request->images) {
             $imagesAction->execute($request->images, $product);
         }
 

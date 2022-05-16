@@ -23,14 +23,12 @@ class ImportProductController extends Controller
             dd($failures);
 
             foreach ($failures as $failure) {
-                $failure->row(); // row that went wrong
-                $failure->attribute(); // either heading key (if using heading row concern) or column index
-                $failure->errors(); // Actual error messages from Laravel validator
-                $failure->values(); // The values of the row that has failed.
+                $failure->row();
+                $failure->attribute();
+                $failure->errors();
+                $failure->values();
             }
         }
-
-        //Excel::import(new ProductsImport(auth()->user()->id, $importAction), $request->file('file')->store(config('filesystems.files_disk')));
         return redirect('/')->with('success', 'All good!');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ProductsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportProductController extends Controller
 {
@@ -12,8 +13,8 @@ class ExportProductController extends Controller
         $this->middleware('can:products.export');
     }
 
-    public function export()
+    public function export(): BinaryFileResponse
     {
-        return Excel::download(new ProductsExport, 'products.xlsx');
+        return Excel::download(new ProductsExport(), 'products.xlsx');
     }
 }

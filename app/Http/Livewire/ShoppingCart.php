@@ -103,10 +103,10 @@ class ShoppingCart extends Component
         }
     }
 
-    //public function deleteProduct($product)
-    //{
-    //    $clave = array_search($product, $this->products);
-    //}
+    public function deleteProduct($product)
+    {
+        $clave = array_search($product, $this->products);
+    }
 
     public function render()
     {

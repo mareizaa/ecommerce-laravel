@@ -11,8 +11,7 @@ class ImportProductAction
 {
     public function execute(array $data, ?Model $product = null): Model
     {
-        if (!$product)
-        {
+        if (!$product) {
             $product = new Product();
             $product->user_id = Arr::get($data, 'user_id');
             $product->reference = Arr::get($data, 'reference');

@@ -28,7 +28,6 @@ class ProductsImport implements ToCollection, WithHeadingRow, WithChunkReading, 
 
     public function collection(Collection $rows): void
     {
-
         foreach ($rows as $row) {
             $product = Product::where('reference', $row['reference'])->first();
 

@@ -12,10 +12,8 @@ class ProductResource extends JsonResource
         $image = $this->image()->first();
         $path = asset('img/imagedefault.jpg');
 
-        if ($image)
-        {
-            if (Storage::disk(config('filesystems.images_disk'))->exists($this->id.'/'.$image->image_name))
-            {
+        if ($image) {
+            if (Storage::disk(config('filesystems.images_disk'))->exists($this->id.'/'.$image->image_name)) {
                 $path = asset('storage/images/'.$this->id.'/'.$image->image_name);
             }
         }

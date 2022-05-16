@@ -14,7 +14,10 @@ use Illuminate\Queue\SerializesModels;
 
 class GetStatusPaymentsJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new job instance.
@@ -35,8 +38,7 @@ class GetStatusPaymentsJob implements ShouldQueue
     {
         $orders = Order::where('state', 'PENDING')->get();
 
-        foreach ($orders as $order)
-        {
+        foreach ($orders as $order) {
             $getStatusAction->handle($order);
         }
     }

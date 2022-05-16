@@ -14,7 +14,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => rand(1,10),
+            'product_id' => rand(1, 10),
             'image_name' => asset('img/imagedefault.jpg')
         ];
     }
