@@ -17,25 +17,23 @@
                                 <a href="{{ route('products.create') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                                     Create New Product
                                 </a>
-                                <a href="{{ route('products.export.process') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                <a href="{{ route('products.export.process') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-2">
                                     Export Products
                                 </a>
                                 <form action="{{ route('products.import.process') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="flex flex-row">
+                                    <div class="flex flex-row ml-2">
+                                        <input
+                                        class="bg-blue-500 flex text-blue-700 font-semibold py-2 px-4 rounded"
+                                        type="file"
+                                        name="file">
                                         <button class="bg-transparent hover:bg-blue-500 flex text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="submit">
                                              <svg fill="#FFF" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0 0h24v24H0z" fill="none"/>
                                                 <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
                                             </svg>
                                             <span class="flex">Import Products</span>
-                                            <input
-                                            class=""
-                                            type="file"
-                                            name="file"
-                                        >
                                         </button>
-
                                     </div>
                                 </form>
                             </div>
